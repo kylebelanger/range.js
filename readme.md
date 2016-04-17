@@ -1,6 +1,6 @@
-# range.js
+# Range.js
 
-Range.js - a simple and light (<100 lines) vanilla JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 <input type='range'> element.
+A simple and light (<100 lines) vanilla JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 ```html<input type='range'>``` element.
 
 ## Usage:
 
@@ -8,23 +8,28 @@ Range.js - a simple and light (<100 lines) vanilla JavaScript library to resize,
 2. Wrap sections that you want to have input range control over.
 3. Simply add a 'data-range='true' attribute to the wrapper element
 4. Initilze range.js object within the page
+    ```html
     <script>
       range = new Range();
     </script>
+    '''
 
-You can have multiple sections with 'data-range='true' attributes attached on the same page. The library will automatically detect the type of content within each section.
+You can have multiple sections with ```html'data-range='true'``` attributes attached on the same page. The library will automatically detect the type of content within each section.
 
 ## Examples
 
 Here are live examples.
 
   * Text example:
+  '''html
   <section data-range="true">
     <input type="range">
     <p>This is some sample text that you can reduce. User Account Control (UAC) is a feature that can help you stay in control of your computer by informing you when a programs makes a change that requires administrator permissions..</p>
   </section>
+  '''
 
   * List example:
+  ```html
   <section data-range="true">
     <input type="range">
     <ul>
@@ -34,6 +39,7 @@ Here are live examples.
       <li>Item four</li>
     </ul>
   </section>
+  ```
 
 ## API
 
