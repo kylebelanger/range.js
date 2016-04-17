@@ -1,6 +1,6 @@
 # Range.js
 
-A simple and light (<100 lines) vanilla JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 ```html<input type='range'>``` element.
+A simple and light (<100 lines) vanilla JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 `<input type='range'>` element.
 
 ## Usage:
 
@@ -12,9 +12,9 @@ A simple and light (<100 lines) vanilla JavaScript library to resize, reduce, or
     <script>
       range = new Range();
     </script>
-    '''
-
-You can have multiple sections with ```html'data-range='true'``` attributes attached on the same page. The library will automatically detect the type of content within each section.
+    ```
+    
+You can have multiple sections with `data-range='true` attributes attached on the same page. The library will automatically detect the type of content within each section.
 
 ## Examples
 
