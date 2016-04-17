@@ -24,15 +24,24 @@ var Range = function() {
 
         // Text
         if (el.children[1].nodeName == "P") {
-            var origText = el.children[1].innerHTML;
-            el.children[1].setAttribute("data-text", origText);
-            initilzeInputRange(0, origText.length, origText.length, 1);
+            // get and bind original data
+            var origHtml = el.children[1].innerHTML;
+            el.children[1].setAttribute("data-value", origHtml);
+            initilzeInputRange(0, origHtml.length, origHtml.length, 1);
         }
         // List
         else if (el.children[1].nodeName == "UL") {
+            // get and bind original data
+            var origHtml = el.children[1].innerHTML;
+            el.children[1].setAttribute("data-value", origHtml);
+            initilzeInputRange(0, el.children[1].childElementCount, el.children[1].childElementCount, 1);
         }
         // Image
         else if (el.children[1].nodeName == "IMG") {
+            // get and bind original data
+            var origHtml = el.children[1].width;
+            el.children[1].setAttribute("data-value", origHtml);
+            initilzeInputRange(0, origHtml, origHtml, 1);
         }
     }
 
@@ -43,29 +52,36 @@ var Range = function() {
     function initilzeInputRange(min, max, value, step) {
         inputRange.min = min;
         inputRange.max = max;
-        inputRange.value = value - 2;
+        inputRange.value = value;
         inputRange.step = step;
     };
 
-    /*  getInnerText
-    *   Get inner text of range section
-     *  @param nested child <p> element(s) of range section x
-     *  @return array of words in the paragraph
-    */
-    function getInnerText(el) {
-        var p  = el;
-        var innerText = p.innerText;
-        return innerText.split(' ');
-    }
-
     /*  updateInnerText
-    *   Update inner text based on range section
     *   @param the event elemenet (input range)
     *   @param range value, number of words to display
     */
-    function updateInnerText(el, len) {
-        var originalText = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-text");
-        el.srcElement.nextSibling.nextElementSibling.innerHTML = originalText.substring(0, len);
+    function updateInnerText(el, range) {
+        var originalText = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
+        el.srcElement.nextSibling.nextElementSibling.innerHTML = originalText.substring(0, range);
+    }
+
+    /*  updateList
+    *   @param the event elemenet (input range)
+    *   @param range value, number of words to display
+    */
+    function updateList(el, range) {
+        var originalList = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
+        console.log(originalList.length);
+    }
+
+    /*  updateImg
+    *   @param the event elemenet (input range)
+    *   @param range value, number of words to display
+    */
+    function updateImg(el, range) {
+        var originalImage = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
+        var diff = originalImage - range;
+        el.srcElement.nextSibling.nextElementSibling.width = originalImage - diff;
     }
 
     /*  eventListener
@@ -73,7 +89,15 @@ var Range = function() {
     */
     function eventListener(el) {
       el.addEventListener('input', function(e) {
-          updateInnerText(e, el.value);
+          if (el.parentNode.children[1].nodeName == "P") {
+              updateInnerText(e, el.value);
+          }
+          else if (el.parentNode.children[1].nodeName == "UL") {
+              updateList(e, el.value);
+          }
+          else if (el.parentNode.children[1].nodeName == "IMG") {
+              updateImg(e, el.value);
+          }
   		});
     };
 
