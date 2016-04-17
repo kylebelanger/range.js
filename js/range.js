@@ -6,8 +6,10 @@
  *  License: MIT
 */
 
-var Range = function() {
+var Range = function(step) {
 
+    // declare step
+    this.step = step || 1;
     // get all DOM elements with data-range attribute
     var rangeElements = document.querySelectorAll("[data-range]");
 
@@ -27,21 +29,21 @@ var Range = function() {
             // get and bind original data
             var origHtml = el.children[1].innerHTML;
             el.children[1].setAttribute("data-value", origHtml);
-            initilzeInputRange(0, origHtml.length, origHtml.length, 1);
+            initilzeInputRange(0, origHtml.length, origHtml.length, this.step);
         }
         // List
         else if (el.children[1].nodeName == "UL") {
             // get and bind original data
-            var origHtml = el.children[1].innerHTML;
+            var origHtml = el.children[1].childElementCount;
             el.children[1].setAttribute("data-value", origHtml);
-            initilzeInputRange(0, el.children[1].childElementCount, el.children[1].childElementCount, 1);
+            initilzeInputRange(0, origHtml, origHtml, this.step);
         }
         // Image
         else if (el.children[1].nodeName == "IMG") {
             // get and bind original data
             var origHtml = el.children[1].width;
             el.children[1].setAttribute("data-value", origHtml);
-            initilzeInputRange(0, origHtml, origHtml, 1);
+            initilzeInputRange(0, origHtml, origHtml, this.step);
         }
     }
 
@@ -62,6 +64,7 @@ var Range = function() {
     */
     function updateInnerText(el, range) {
         var originalText = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
+        // update on DOM
         el.srcElement.nextSibling.nextElementSibling.innerHTML = originalText.substring(0, range);
     }
 
@@ -71,7 +74,11 @@ var Range = function() {
     */
     function updateList(el, range) {
         var originalList = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
-        console.log(originalList.length);
+        var ul = el.srcElement.parentNode.children[1];
+        // for each li, check diff
+        for (var i = 0; i < originalList; i++) {
+            ul.children[i].style.display = (i < range) ? "":"none";
+        }
     }
 
     /*  updateImg
@@ -81,6 +88,7 @@ var Range = function() {
     function updateImg(el, range) {
         var originalImage = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
         var diff = originalImage - range;
+        // update on DOM
         el.srcElement.nextSibling.nextElementSibling.width = originalImage - diff;
     }
 
@@ -89,17 +97,20 @@ var Range = function() {
     */
     function eventListener(el) {
       el.addEventListener('input', function(e) {
+          // Text
           if (el.parentNode.children[1].nodeName == "P") {
               updateInnerText(e, el.value);
           }
+          // List
           else if (el.parentNode.children[1].nodeName == "UL") {
               updateList(e, el.value);
           }
+          // Image
           else if (el.parentNode.children[1].nodeName == "IMG") {
               updateImg(e, el.value);
           }
   		});
-    };
+    }
 
 
 }
