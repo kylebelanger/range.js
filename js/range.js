@@ -1,7 +1,7 @@
 /*  Range.js
- *  A circa 2016 light JavaScript library to resize, reduce, or change ranges of DOM elements.
+ *  A JavaScript library to resize, reduce, or change ranges of DOM elements.
  *
- *  Author: Kyle Scott Belanger
+ *  Author: Kyle Belanger
  *  Origin: April 22, 2016
  *  License: MIT
 */
@@ -26,10 +26,15 @@ var Range = function(step) {
 
         // Text
         if (el.children[1].nodeName == "P") {
-            // get and bind original data
-            var origHtml = el.children[1].innerHTML;
-            el.children[1].setAttribute("data-value", origHtml);
-            initilzeInputRange(0, origHtml.length, origHtml.length, this.step);
+            var numParagraphs = el.children.length - 1;
+            var fullText, origText;
+
+            for (var p = 0; p < numParagraphs; p++) {
+                origText = el.children[p + 1].innerHTML;
+                el.children[p + 1].setAttribute("data-text", origText);
+                fullText += origText;
+            }
+            initilzeInputRange(0, fullText.length, fullText.length, 1);
         }
         // List
         else if (el.children[1].nodeName == "UL") {
@@ -63,9 +68,26 @@ var Range = function(step) {
     *   @param range value, number of words to display
     */
     function updateInnerText(el, range) {
-        var originalText = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
-        // update on DOM
-        el.srcElement.nextSibling.nextElementSibling.innerHTML = originalText.substring(0, range);
+        var paragraphs = [];
+        var fullTextLength = parseInt(fullText.length);
+        var cut = parseInt(fullTextLength) - parseInt(length);
+
+        for (var p = 0; p < numParagraphs; p++) {
+            var ob = {};
+            ob['text'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value;
+            ob['numWords'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value.length;
+            paragraphs.push(ob);
+        }
+
+        for (var x = numParagraphs; x > 0; x--) {
+          if (cut < paragraphs[x - 1]['text'].length) {
+              el.srcElement.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, paragraphs[x - 1]['numWords'] - cut);
+              return;
+          }
+          else {
+              return;
+          }
+        }
     }
 
     /*  updateList
