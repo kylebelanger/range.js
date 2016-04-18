@@ -8,9 +8,11 @@ A simple and light (<100 lines) vanilla JavaScript library to resize, reduce, or
 2. Wrap sections that you want to have input range control over.
 3. Simply add a 'data-range='true' attribute to the wrapper element
 4. Initialize range.js object within the page
-* ```html <script>
-              range = new Range();
-          </script>```
+* ```html
+  <script>
+      range = new Range();
+  </script>
+  ```
 
 You can have multiple sections with `data-range='true` attributes attached on the same page. The library will automatically detect the type of content within each section.
 
@@ -42,7 +44,7 @@ Here are live examples.
 
 ## API
 
-You can set the 'step' of the range through object initilization. The default 'step' is 1. However, setting a decimal (i.e. 0.25) can help make scrolling on the input element smoother for items that have a small amount of content (i.e. text or lists).
+You can set the 'step' of the range through object initialization. The default 'step' is 1. However, setting a decimal (i.e. 0.25) can help make scrolling on the input element smoother for items that have a small amount of content (i.e. text or lists).
 
 ## Acknowledgements
 
