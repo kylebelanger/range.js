@@ -9,11 +9,8 @@ A simple and light vanilla JavaScript library to resize, reduce, or change range
 3. Add a `data-range="true"` attribute to the wrapper element
 
   ```html
-  <!-- wrapper -->
   <section data-range="true">
-        <!-- input control -->
        <input type="range">
-       <!-- x amount of p elements -->
        <p>This is some sample text that you can reduce.</p>
   </section>
   ```
@@ -30,9 +27,9 @@ You can have multiple sections with `data-range="true"` attributes attached on t
 
 Currently, the library supports range control of the following elements:
 
-* <p>
-* <ul>
-* <img>
+  * <p>
+  * <ul>
+  * <img>
 
 
 ## Examples
