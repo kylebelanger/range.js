@@ -1,5 +1,5 @@
 /*  Range.js
- *  A JavaScript library to resize, reduce, or change ranges of DOM elements.
+ *  A library to resize, reduce, or change ranges of DOM elements.
  *
  *  Author: Kyle Belanger
  *  Origin: April 22, 2016
@@ -10,6 +10,7 @@ var Range = function(step) {
 
     // declare step
     this.step = step || 1;
+
     // get all DOM elements with data-range attribute
     var rangeElements = document.querySelectorAll("[data-range]");
 
@@ -34,6 +35,7 @@ var Range = function(step) {
                 el.children[p + 1].setAttribute("data-text", origText);
                 fullText += origText;
             }
+
             initilzeInputRange(0, fullText.length, fullText.length, 1);
         }
         // List
@@ -65,28 +67,45 @@ var Range = function(step) {
 
     /*  updateInnerText
     *   @param the event elemenet (input range)
-    *   @param range value, number of words to display
+    *   @param range value, number of char to display
     */
     function updateInnerText(el, range) {
-        var paragraphs = [];
-        var fullTextLength = parseInt(fullText.length);
-        var cut = parseInt(fullTextLength) - parseInt(length);
+        // declare varibales
+        var paragraphs = [],
+            totalCut;
 
+        // get length of all combined p text
+        var fullTextLength = parseInt(fullText.length);
+        // calculate amount to cut
+        var cut = parseInt(fullTextLength) - parseInt(range);
+
+        // get text and length for each p element
         for (var p = 0; p < numParagraphs; p++) {
-            var ob = {};
-            ob['text'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value;
-            ob['numWords'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value.length;
-            paragraphs.push(ob);
+            var parObject = {};
+            parObject['text'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value;
+            parObject['length'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value.length;
+            paragraphs.push(parObject);
         }
 
-        for (var x = numParagraphs; x > 0; x--) {
-          if (cut < paragraphs[x - 1]['text'].length) {
-              el.srcElement.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, paragraphs[x - 1]['numWords'] - cut);
-              return;
-          }
-          else {
-              return;
-          }
+        // if less than last paragraph, cut and break
+        if (cut < paragraphs[numParagraphs - 1]['length']) {
+            el.srcElement.parentNode.children[numParagraphs].innerHTML = paragraphs[numParagraphs - 1]['text'].substring(0, paragraphs[numParagraphs - 1]['length'] - cut);
+        }
+        // otherwise backwards loop to remove text in each p
+        else {
+            for (var x = numParagraphs; x > 0; x--) {
+                // if less than current p, cut and break
+                if (cut < paragraphs[numParagraphs - 1]['length']) {
+                    el.srcElement.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, paragraphs[x - 1]['length'] - cut);
+                    break;
+                }
+                else {
+                    // remove this p
+                    el.srcElement.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, 0);
+                    // subtract this p length from cut total
+                    cut = cut - paragraphs[x - 1]['length'];
+                }
+            }
         }
     }
 
@@ -97,7 +116,6 @@ var Range = function(step) {
     function updateList(el, range) {
         var originalList = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
         var ul = el.srcElement.parentNode.children[1];
-        // for each li, check diff
         for (var i = 0; i < originalList; i++) {
             ul.children[i].style.display = (i < range) ? "":"none";
         }
@@ -110,7 +128,6 @@ var Range = function(step) {
     function updateImg(el, range) {
         var originalImage = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
         var diff = originalImage - range;
-        // update on DOM
         el.srcElement.nextSibling.nextElementSibling.width = originalImage - diff;
     }
 
