@@ -70,9 +70,11 @@ var Range = function(step) {
     *   @param range value, number of char to display
     */
     function updateInnerText(el, range) {
+
         // declare varibales
         var paragraphs = [],
-            totalCut;
+            totalCut,
+            target = el.srcElement || el.target;
 
         // get length of all combined p text
         var fullTextLength = parseInt(fullText.length);
@@ -82,26 +84,26 @@ var Range = function(step) {
         // get text and length for each p element
         for (var p = 0; p < numParagraphs; p++) {
             var parObject = {};
-            parObject['text'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value;
-            parObject['length'] = el.srcElement.parentNode.children[p + 1].attributes["data-text"].value.length;
+            parObject['text'] = target.parentNode.children[p + 1].attributes["data-text"].value;
+            parObject['length'] = target.parentNode.children[p + 1].attributes["data-text"].value.length;
             paragraphs.push(parObject);
         }
 
         // if less than last paragraph, cut and break
         if (cut < paragraphs[numParagraphs - 1]['length']) {
-            el.srcElement.parentNode.children[numParagraphs].innerHTML = paragraphs[numParagraphs - 1]['text'].substring(0, paragraphs[numParagraphs - 1]['length'] - cut);
+            target.parentNode.children[numParagraphs].innerHTML = paragraphs[numParagraphs - 1]['text'].substring(0, paragraphs[numParagraphs - 1]['length'] - cut);
         }
         // otherwise backwards loop to remove text in each p
         else {
             for (var x = numParagraphs; x > 0; x--) {
                 // if less than current p, cut and break
                 if (cut < paragraphs[numParagraphs - 1]['length']) {
-                    el.srcElement.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, paragraphs[x - 1]['length'] - cut);
+                    target.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, paragraphs[x - 1]['length'] - cut);
                     break;
                 }
                 else {
                     // remove this p
-                    el.srcElement.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, 0);
+                    target.parentNode.children[x].innerHTML = paragraphs[x - 1]['text'].substring(0, 0);
                     // subtract this p length from cut total
                     cut = cut - paragraphs[x - 1]['length'];
                 }
@@ -114,8 +116,9 @@ var Range = function(step) {
     *   @param range value, number of words to display
     */
     function updateList(el, range) {
-        var originalList = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
-        var ul = el.srcElement.parentNode.children[1];
+        var target = el.srcElement || el.target;
+        var originalList = target.nextSibling.nextElementSibling.getAttribute("data-value");
+        var ul = target.parentNode.children[1];
         for (var i = 0; i < originalList; i++) {
             ul.children[i].style.display = (i < range) ? "":"none";
         }
@@ -126,9 +129,10 @@ var Range = function(step) {
     *   @param range value, number of words to display
     */
     function updateImg(el, range) {
-        var originalImage = el.srcElement.nextSibling.nextElementSibling.getAttribute("data-value");
+        var target = el.srcElement || el.target;
+        var originalImage = target.nextSibling.nextElementSibling.getAttribute("data-value");
         var diff = originalImage - range;
-        el.srcElement.nextSibling.nextElementSibling.width = originalImage - diff;
+        target.nextSibling.nextElementSibling.width = originalImage - diff;
     }
 
     /*  eventListener
@@ -150,6 +154,5 @@ var Range = function(step) {
           }
   		});
     }
-
 
 }
