@@ -5,16 +5,16 @@ A simple and light vanilla JavaScript library to resize, reduce, or change range
 ## Usage:
 
 1. Include range.js in your dependencies
-2. Wrap sections that you want to have input range control over
-3. Simply add a `data-range="true"` attribute to the wrapper element
+2. Wrap sections that you want to have input range control over, and add a `data-range="true"` attribute to the wrapper element
 
   ```html
   <section data-range="true">
        <input type="range">
+       <p>This is some sample text that you can reduce.</p>
   </section>
   ```
 
-4. Initialize a Range object within the page
+3. Initialize a Range object within the page
 
   ```html
   <script>
@@ -26,9 +26,9 @@ You can have multiple sections with `data-range="true"` attributes attached on t
 
 Currently, the library supports range control of the following elements:
 
-* `<p>`
-* `<ul>`
-* `<img>`
+* <p>
+* <ul>
+* <img>
 
 ## Examples
 
@@ -40,7 +40,8 @@ Here are live [examples](http://kylesb.github.io/range.js/).
   <!-- text example -->
   <section data-range="true">
        <input type="range">
-       <p>This is some sample text that you can reduce. User Account Control (UAC) is a feature that can help you stay in control of your computer by informing you when a programs makes a change that requires administrator permissions..</p>
+       <p>This is some sample text that you can reduce.</p>
+       <p>Also works with multiple p elements within the wrapper.</p>
   </section>
   ```
 2. List example:
@@ -77,5 +78,5 @@ To set the `step`, pass an interget or decimal on object initialization.
 
 ## Acknowledgements
 
-Thank you to the following individuals for contributions:
+Thank you to the following individuals for help and contributions:
   * Noah Freitas
