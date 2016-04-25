@@ -25,12 +25,6 @@ A simple and light vanilla JavaScript library to resize, reduce, or change range
 
 You can have multiple sections with `data-range="true"` attributes attached on the same page. The library will automatically detect the type of content within each section.
 
-Currently, the library supports range control of the following elements:
-
-  * <p>
-  * <ul>
-  * <img>
-
 
 ## Examples
 
@@ -64,6 +58,17 @@ Here are live [examples](http://kylesb.github.io/range.js/).
        </ul>
   </section>
   ```
+
+3. Image example:
+
+  ```html
+  <!-- image example -->
+  <section data-range="true">
+       <input type="range">
+       <img src="ok.png" width="250">
+  </section>
+  ```
+  
 
 ## API
 
