@@ -4,10 +4,17 @@ A simple and light vanilla JavaScript library to resize, reduce, or change range
 
 ## Usage:
 
-1. Include the `range.js` library in your dependencies
+1. Include range.js in your dependencies
 2. Wrap sections that you want to have input range control over
 3. Simply add a `data-range="true"` attribute to the wrapper element
-4. Initialize a `Range` object within the page
+
+  ```html
+  <section data-range="true">
+       <input type="range">
+  </section>
+  ```
+
+4. Initialize a Range object within the page
 
   ```html
   <script>
