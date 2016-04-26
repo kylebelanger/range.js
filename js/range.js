@@ -36,29 +36,29 @@ var Range = function(step) {
                 fullText += origText;
             }
 
-            initilzeInputRange(0, fullText.length, fullText.length, 1);
+            initializeInputRange(0, fullText.length, fullText.length, 1);
         }
         // List
-        else if (el.children[1].nodeName == "UL") {
+        else if (el.children[1].nodeName == "UL" || el.children[1].nodeName == "OL") {
             // get and bind original data
             var origHtml = el.children[1].childElementCount;
             el.children[1].setAttribute("data-value", origHtml);
-            initilzeInputRange(0, origHtml, origHtml, this.step);
+            initializeInputRange(0, origHtml, origHtml, this.step);
         }
         // Image
         else if (el.children[1].nodeName == "IMG") {
             // get and bind original data
             var origHtml = el.children[1].width;
             el.children[1].setAttribute("data-value", origHtml);
-            initilzeInputRange(0, origHtml, origHtml, this.step);
+            initializeInputRange(0, origHtml, origHtml, this.step);
         }
     }
 
-    /*  initilzeInputRange
+    /*  initializeInputRange
      *  Setup the default initial values for input range
      *  @param minimum value, maximum value, default value, step
     */
-    function initilzeInputRange(min, max, value, step) {
+    function initializeInputRange(min, max, value, step) {
         inputRange.min = min;
         inputRange.max = max;
         inputRange.value = value;
@@ -145,7 +145,7 @@ var Range = function(step) {
               updateInnerText(e, el.value);
           }
           // List
-          else if (el.parentNode.children[1].nodeName == "UL") {
+          else if (el.parentNode.children[1].nodeName == "UL" || el.parentNode.children[1].nodeName == "OL") {
               updateList(e, el.value);
           }
           // Image
