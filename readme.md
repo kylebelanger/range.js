@@ -68,7 +68,7 @@ Here are live [examples](http://kylesb.github.io/range.js/).
        <img src="ok.png" width="250">
   </section>
   ```
-  
+
 
 ## API
 
@@ -87,3 +87,4 @@ To set the `step`, pass an interget or decimal on object initialization.
 
 Thank you to the following individuals for help and contributions:
   * Noah Freitas
+  * James Quinlan
