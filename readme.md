@@ -83,6 +83,18 @@ To set the `step`, pass an interget or decimal on object initialization.
 </script>
 ```
 
+
+## Contributing
+
+This is a small, open-source project, and contributions are encouraged. Check the  [Issues](https://github.com/kylesb/range.js/issues) or [Wiki](https://github.com/kylesb/range.js/wiki) section to view the project roadmap and future goals.
+
+  1. Fork the repository
+  2. Create a branch for your patch or feature
+  3. Make your changes
+  4. Push to your Fork
+  5. Open a pull request and describe your changes
+
+
 ## Acknowledgements
 
 Thank you to the following individuals for help and contributions:
