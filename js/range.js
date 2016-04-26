@@ -132,7 +132,7 @@ var Range = function(step) {
         var target = el.srcElement || el.target;
         var originalImage = target.nextSibling.nextElementSibling.getAttribute("data-value");
         var diff = originalImage - range;
-        target.nextSibling.nextElementSibling.width = originalImage - diff;
+        target.nextSibling.nextElementSibling.style.width = originalImage - diff + "px";
     }
 
     /*  eventListener
