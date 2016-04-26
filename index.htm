@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <title>Range.js</title>
+  </head>
+
+  <body>
+
+    <header>
+      <h2>Range.js</h2>
+      <p>A simple JavaScript library to resize, reduce, or change ranges of DOM elements. Open source on <a href="http://github.com/kylesb/range.js">GitHub</a>.</p>
+    </header>
+
+    <hr>
+
+    <section>
+      <p>Text example:</p>
+
+      <section data-range="true">
+        <input type="range">
+        <p>This is some sample text that you can reduce. Below is an excerpt from John Steinback's famous novel, <i>The Grapes of Wraph </i>.</p>
+
+        <p>Soft fingers began to tap the sill of the car window, and the hard fingers tightened on the restless drawing sticks. In the doorways of the sun-beaten tenant houses, women sighed and then shifted feet so that the one that had been down was now on top, and the toes working. Dogs came sniffing near the owner cars and wetted on all four tires one after another. And chickens lay in the sunny dust and fluffed their feathers to get the cleansing dust down to the skin. In the little sties the pigs grunted inquiringly over the muddy remnants of the slops.</p>
+
+        <p>The squatting men looked down again. What do you want us to do? We canʼt take less share of the crop-weʼre half starved now. The kids are hungry all the time. We got no clothes, torn anʼ ragged. If all the neighbors werenʼt the same, weʼd be ashamed to go to a meeting.</p>
+      </section>
+    </section>
+
+    <hr>
+
+    <section>
+      <p>List example</p>
+
+      <section data-range="true">
+        <input type="range">
+        <ul>
+          <li>Item one</li>
+          <li>Item two</li>
+          <ul>
+            <li>Nestd two-one</li>
+            <li>Nestd two-two</li>
+          </ul>
+          <li>Item three</li>
+          <ul>
+            <li>Nestd three-one</li>
+            <li>Nestd three-two</li>
+          </ul>
+          <li>Item four</li>
+        </ul>
+      </section>
+    </section>
+
+    <hr>
+
+    <section>
+      <p>Image example:</p>
+
+      <section data-range="true">
+        <input type="range">
+        <img width="350" src="img/tree.jpg">
+      </section>
+    </section>
+
+    <script src='js/range.js'></script>
+    <script>
+      range = new Range(0.25);
+    </script>
+
+  </body>
+</html>
