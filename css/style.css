@@ -3,3 +3,7 @@ input {
   position: static;
   margin: 0 100% 0 0;
 }
+
+img {
+  width: 350px;
+}
