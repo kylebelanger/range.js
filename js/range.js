@@ -21,12 +21,13 @@ var Range = function(step) {
 
         // get inputRange element
         var inputRange = el.children[0];
+        var firstElement = el.children[1];
 
         // attach event listener
         eventListener(inputRange);
 
         // Text
-        if (el.children[1].nodeName == "P") {
+        if (firstElement.nodeName == "P") {
             var numParagraphs = el.children.length - 1;
             var fullText, origText;
 
@@ -39,11 +40,14 @@ var Range = function(step) {
             initializeInputRange(0, fullText.length, fullText.length, 1);
         }
         // List
-        else if (el.children[1].nodeName == "UL" || el.children[1].nodeName == "OL") {
+        else if (firstElement.nodeName == "UL" || firstElement.nodeName == "OL") {
             // get and bind original data
-            var origHtml = el.children[1].childElementCount;
-            el.children[1].setAttribute("data-value", origHtml);
-            initializeInputRange(0, origHtml, origHtml, this.step);
+            var childrenCount = 0;
+
+            // Count all non-UL elements within the original UL
+            searchChildren(firstElement);
+
+            initializeInputRange(0, childrenCount, childrenCount, this.step);
         }
         // Image
         else if (el.children[1].nodeName == "IMG") {
@@ -51,6 +55,23 @@ var Range = function(step) {
             var origHtml = el.children[1].width;
             el.children[1].setAttribute("data-value", origHtml);
             initializeInputRange(0, origHtml, origHtml, this.step);
+        }
+    }
+
+    /* searchChildren
+     * Recursive function that counts and scans nodes and child nodes
+     * Assigns each non-UL element a data-position for objective tracking of order
+     * @param element to be counted and searched for children elements
+    */
+    function searchChildren(el){
+        for(var i = 0; i < el.children.length; i++){
+            if(el.children[i].nodeName != 'UL'){
+                childrenCount++;
+                el.children[i].setAttribute('data-position', childrenCount);
+            }
+            if(el.children[i].children){
+                searchChildren(el.children[i]);
+            }
         }
     }
 
@@ -112,15 +133,21 @@ var Range = function(step) {
     }
 
     /*  updateList
-    *   @param the event elemenet (input range)
+    *   @param the event object (input range)
     *   @param range value, number of words to display
     */
-    function updateList(el, range) {
-        var target = el.srcElement || el.target;
-        var originalList = target.nextSibling.nextElementSibling.getAttribute("data-value");
-        var ul = target.parentNode.children[1];
-        for (var i = 0; i < originalList; i++) {
-            ul.children[i].style.display = (i < range) ? "":"none";
+    function updateList(e, range) {
+        var target = e.srcElement || e.target;
+        var list = target.nextSibling.nextElementSibling;
+        var listNumber = list.childElementCount;
+
+        for (var i = 0; i < listNumber; i++) {
+            if(list.children[i].children){
+                for(var j = 0; j < list.children[i].children.length; j++){
+                    list.children[i].children[j].style.display = (list.children[i].children[j].getAttribute('data-position') <= range) ? "":"none";
+                }
+            }
+            if(list.children[i].nodeName != 'UL') list.children[i].style.display = (list.children[i].getAttribute('data-position') <= range) ? "":"none";
         }
     }
 
