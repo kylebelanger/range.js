@@ -1,14 +1,13 @@
 /*  Range.js
  *  A library to resize, reduce, or change ranges of DOM elements.
  *
- *  Author: Kyle Belanger
  *  Origin: April 22, 2016
  *  License: MIT
 */
 
 var Range = function(step) {
 
-    // declare step
+    // declare constructors
     this.step = step || 1;
 
     // get all DOM elements with data-range attribute
@@ -16,6 +15,7 @@ var Range = function(step) {
 
     // for each range element on DOM
     for (var i = 0; i < rangeElements.length; i++) {
+
         // get x DOM element with [data-range] attribute
         var el = rangeElements[i];
 
@@ -26,7 +26,7 @@ var Range = function(step) {
         // attach event listener
         eventListener(inputRange);
 
-        // Text
+        // Paragraph
         if (firstElement.nodeName == "P") {
             var numParagraphs = el.children.length - 1;
             var fullText, origText;
@@ -41,7 +41,7 @@ var Range = function(step) {
         }
         // List
         else if (firstElement.nodeName == "UL" || firstElement.nodeName == "OL") {
-            // get and bind original data
+            // set initial children count
             var childrenCount = 0;
 
             // Count all non-UL elements within the original UL
@@ -58,10 +58,11 @@ var Range = function(step) {
         }
     }
 
-    /* searchChildren
-     * Recursive function that counts and scans nodes and child nodes
-     * Assigns each non-UL element a data-position for objective tracking of order
-     * @param element to be counted and searched for children elements
+    /*  searchChildren
+     *  Recursive function that counts and scans nodes and child nodes
+     *  Assigns each non-UL element a data-position for objective tracking of order
+     *
+     *  @param element to be counted and searched for children elements
     */
     function searchChildren(el){
         for(var i = 0; i < el.children.length; i++){
@@ -76,6 +77,7 @@ var Range = function(step) {
     }
 
     /*  initializeInputRange
+     *
      *  Setup the default initial values for input range
      *  @param minimum value, maximum value, default value, step
     */
@@ -87,8 +89,9 @@ var Range = function(step) {
     };
 
     /*  updateInnerText
-    *   @param the event elemenet (input range)
-    *   @param range value, number of char to display
+     *
+     *  @param the event elemenet (input range)
+     *  @param range value, number of char to display
     */
     function updateInnerText(el, range) {
 
@@ -133,8 +136,9 @@ var Range = function(step) {
     }
 
     /*  updateList
-    *   @param the event object (input range)
-    *   @param range value, number of words to display
+     *
+     *  @param the event object (input range)
+     *  @param range value, number of words to display
     */
     function updateList(e, range) {
         var target = e.srcElement || e.target;
@@ -152,8 +156,8 @@ var Range = function(step) {
     }
 
     /*  updateImg
-    *   @param the event elemenet (input range)
-    *   @param range value, number of words to display
+     *  @param the event elemenet (input range)
+     *  @param range value, number of words to display
     */
     function updateImg(el, range) {
         var target = el.srcElement || el.target;
