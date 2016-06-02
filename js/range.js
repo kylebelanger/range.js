@@ -91,7 +91,7 @@ var Range = function(step) {
         inputRange.max = max;
         inputRange.value = value;
         inputRange.step = step;
-    };
+    }
 
     /*  updateInnerText
      *  Updates the visable range of text on multiple p elements
@@ -151,13 +151,22 @@ var Range = function(step) {
         var list = target.nextSibling.nextElementSibling;
         var listNumber = list.childElementCount;
 
+        displayChildren(list, listNumber, range);
+    }
+
+    /*  displayChildren
+     *
+     *  @param Object - Event object
+    */
+    function displayChildren(list, listNumber, range) {
+
         for (var i = 0; i < listNumber; i++) {
-            if(list.children[i].children){
-                for(var j = 0; j < list.children[i].children.length; j++){
-                    list.children[i].children[j].style.display = (list.children[i].children[j].getAttribute('data-position') <= range) ? "":"none";
-                }
+            if (list.children[i].nodeName != 'UL') {
+                list.children[i].style.display = (list.children[i].getAttribute('data-position') <= range) ? "":"none";
             }
-            if(list.children[i].nodeName != 'UL') list.children[i].style.display = (list.children[i].getAttribute('data-position') <= range) ? "":"none";
+            if (list.children[i].children.length > 0) {
+                displayChildren(list.children[i], list.children[i].childElementCount, range);
+            }
         }
     }
 
@@ -195,4 +204,4 @@ var Range = function(step) {
   		});
     }
 
-}
+};
