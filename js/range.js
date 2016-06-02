@@ -4,7 +4,7 @@
  *  Origin: April 22, 2016
  *  License: MIT
  *
- *  @param Integer - step value of input range
+ *  @param Real - step value of input range
 */
 
 var Range = function(step) {
@@ -81,10 +81,10 @@ var Range = function(step) {
     /*  initializeInputRange
      *  Setup the default initial values for input range
      *
-     *  @param Integer - minimum value,
-     *  @param Integer - maximum value,
-     *  @param Integer - default value,
-     *  @param Integer - step
+     *  @param Real - minimum value,
+     *  @param Real - maximum value,
+     *  @param Real - default value,
+     *  @param Real - step
     */
     function initializeInputRange(min, max, value, step) {
         inputRange.min = min;
@@ -97,7 +97,7 @@ var Range = function(step) {
      *  Updates the visable range of text on multiple p elements
      *
      *  @param Object - Event object
-     *  @param Integer - Range value (i.e. 3)
+     *  @param Real - Range value (i.e. 3.2)
     */
     function updateInnerText(el, range) {
 
@@ -144,7 +144,7 @@ var Range = function(step) {
     /*  updateList
      *
      *  @param Object - Event object
-     *  @param Integer - Range value (i.e. 3)
+     *  @param Real - Range value (i.e. 3.2)
     */
     function updateList(e, range) {
         var target = e.srcElement || e.target;
@@ -164,7 +164,7 @@ var Range = function(step) {
     /*  updateImg
      *
      *  @param Object - Event object
-     *  @param Integer - Range value (i.e. 3)
+     *  @param Real - Range value (i.e. 3.2)
     */
     function updateImg(el, range) {
         var target = el.srcElement || el.target;
