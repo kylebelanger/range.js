@@ -86,7 +86,7 @@ To set the `step`, pass an interget or decimal on object initialization.
 
 ## Contributing
 
-This is a small, open-source project, and contributions are encouraged. Check the  [Issues](https://github.com/kylesb/range.js/issues) or [Wiki](https://github.com/kylesb/range.js/wiki) section to view the project roadmap and future goals.
+This is a small, open-source project, and contributions are encouraged. Check the  [Issues](https://github.com/kylesb/range.js/issues) section to view the project roadmap and future goals.
 
   1. Fork the repository
   2. Create a branch for your patch or feature
