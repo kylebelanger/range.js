@@ -28,7 +28,7 @@ var Range = function(step) {
         // attach event listener
         eventListener(inputRange);
 
-        // Paragraph
+        // paragraph
         if (sectionRange.nodeName == "P") {
             var numParagraphs = el.children.length - 1;
             var fullText, origText;
@@ -41,7 +41,7 @@ var Range = function(step) {
 
             initializeInputRange(0, fullText.length, fullText.length, 1);
         }
-        // List
+        // list
         else if (sectionRange.nodeName == "UL" || sectionRange.nodeName == "OL") {
             // set initial children count
             var childrenCount = 0;
@@ -51,7 +51,7 @@ var Range = function(step) {
 
             initializeInputRange(0, childrenCount, childrenCount, this.step);
         }
-        // Image
+        // image
         else if (el.children[1].nodeName == "IMG") {
             // get and bind original data
             var origHtml = el.children[1].width;
@@ -151,21 +151,24 @@ var Range = function(step) {
         var list = target.nextSibling.nextElementSibling;
         var listNumber = list.childElementCount;
 
-        displayChildren(list, listNumber, range);
+        displayList(list, listNumber, range);
     }
 
-    /*  displayChildren
+    /*  displayList
+     *  Recursive function to handle multiple nested lists
      *
-     *  @param Object - Event object
+     *  @param Object - List section
+     *  @param Integer - Number of node elements in UL
+     *  @param Real - Range value (i.e. 3.2)
     */
-    function displayChildren(list, listNumber, range) {
+    function displayList(list, listNumber, range) {
 
         for (var i = 0; i < listNumber; i++) {
             if (list.children[i].nodeName != 'UL') {
                 list.children[i].style.display = (list.children[i].getAttribute('data-position') <= range) ? "":"none";
             }
             if (list.children[i].children.length > 0) {
-                displayChildren(list.children[i], list.children[i].childElementCount, range);
+                displayList(list.children[i], list.children[i].childElementCount, range);
             }
         }
     }
@@ -189,15 +192,15 @@ var Range = function(step) {
     */
     function eventListener(el) {
       el.addEventListener('input', function(e) {
-          // Text
+          // text
           if (el.parentNode.children[1].nodeName == "P") {
               updateInnerText(e, el.value);
           }
-          // List
+          // list
           else if (el.parentNode.children[1].nodeName == "UL" || el.parentNode.children[1].nodeName == "OL") {
               updateList(e, el.value);
           }
-          // Image
+          // image
           else if (el.parentNode.children[1].nodeName == "IMG") {
               updateImg(e, el.value);
           }
