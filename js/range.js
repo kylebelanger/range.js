@@ -3,11 +3,13 @@
  *
  *  Origin: April 22, 2016
  *  License: MIT
+ *
+ *  @param Integer - step value of input range
 */
 
 var Range = function(step) {
 
-    // declare constructors
+    // set step or default to 1
     this.step = step || 1;
 
     // get all DOM elements with data-range attribute
@@ -19,15 +21,15 @@ var Range = function(step) {
         // get x DOM element with [data-range] attribute
         var el = rangeElements[i];
 
-        // get inputRange element
+        // set DOM elements corrosponding to this range section
         var inputRange = el.children[0];
-        var firstElement = el.children[1];
+        var sectionRange = el.children[1];
 
         // attach event listener
         eventListener(inputRange);
 
         // Paragraph
-        if (firstElement.nodeName == "P") {
+        if (sectionRange.nodeName == "P") {
             var numParagraphs = el.children.length - 1;
             var fullText, origText;
 
@@ -40,12 +42,12 @@ var Range = function(step) {
             initializeInputRange(0, fullText.length, fullText.length, 1);
         }
         // List
-        else if (firstElement.nodeName == "UL" || firstElement.nodeName == "OL") {
+        else if (sectionRange.nodeName == "UL" || sectionRange.nodeName == "OL") {
             // set initial children count
             var childrenCount = 0;
 
             // Count all non-UL elements within the original UL
-            searchChildren(firstElement);
+            searchChildren(sectionRange);
 
             initializeInputRange(0, childrenCount, childrenCount, this.step);
         }
@@ -62,7 +64,7 @@ var Range = function(step) {
      *  Recursive function that counts and scans nodes and child nodes
      *  Assigns each non-UL element a data-position for objective tracking of order
      *
-     *  @param element to be counted and searched for children elements
+     *  @param Object - Element to be counted and searched for children elements
     */
     function searchChildren(el){
         for(var i = 0; i < el.children.length; i++){
@@ -77,9 +79,12 @@ var Range = function(step) {
     }
 
     /*  initializeInputRange
-     *
      *  Setup the default initial values for input range
-     *  @param minimum value, maximum value, default value, step
+     *
+     *  @param Integer - minimum value,
+     *  @param Integer - maximum value,
+     *  @param Integer - default value,
+     *  @param Integer - step
     */
     function initializeInputRange(min, max, value, step) {
         inputRange.min = min;
@@ -89,9 +94,10 @@ var Range = function(step) {
     };
 
     /*  updateInnerText
+     *  Updates the visable range of text on multiple p elements
      *
-     *  @param the event elemenet (input range)
-     *  @param range value, number of char to display
+     *  @param Object - Event object
+     *  @param Integer - Range value (i.e. 3)
     */
     function updateInnerText(el, range) {
 
@@ -137,8 +143,8 @@ var Range = function(step) {
 
     /*  updateList
      *
-     *  @param the event object (input range)
-     *  @param range value, number of words to display
+     *  @param Object - Event object
+     *  @param Integer - Range value (i.e. 3)
     */
     function updateList(e, range) {
         var target = e.srcElement || e.target;
@@ -156,8 +162,9 @@ var Range = function(step) {
     }
 
     /*  updateImg
-     *  @param the event elemenet (input range)
-     *  @param range value, number of words to display
+     *
+     *  @param Object - Event object
+     *  @param Integer - Range value (i.e. 3)
     */
     function updateImg(el, range) {
         var target = el.srcElement || el.target;
@@ -167,7 +174,9 @@ var Range = function(step) {
     }
 
     /*  eventListener
-     *  @param event object (input range)
+     *  Attach an event listener to this element
+     *
+     *  @param Object - Event object
     */
     function eventListener(el) {
       el.addEventListener('input', function(e) {
