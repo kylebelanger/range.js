@@ -67,12 +67,12 @@ var Range = function(step) {
      *  @param Object - Element to be counted and searched for children elements
     */
     function searchChildren(el){
-        for(var i = 0; i < el.children.length; i++){
-            if(el.children[i].nodeName != 'UL'){
+        for (var i = 0; i < el.children.length; i++) {
+            if (el.children[i].nodeName != 'UL') {
                 childrenCount++;
                 el.children[i].setAttribute('data-position', childrenCount);
             }
-            if(el.children[i].children){
+            if (el.children[i].children) {
                 searchChildren(el.children[i]);
             }
         }
