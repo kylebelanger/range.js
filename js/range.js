@@ -168,7 +168,7 @@ var Range = function(step) {
                 list.children[i].style.display = (list.children[i].getAttribute('data-position') <= range) ? "":"none";
             }
             if (list.children[i].children.length > 0) {
-                displayList(list.children[i], list.children[i].childElementCount, range);
+                displayList(list.children[i], list.children[i].children.length, range);
             }
         }
     }
@@ -194,11 +194,11 @@ var Range = function(step) {
       el.addEventListener('input', function(e) {
           // text
           if (el.parentNode.children[1].nodeName == "P") {
-              updateInnerText(e, el.value);
+              updateInnerText(e, parseInt(el.value));
           }
           // list
           else if (el.parentNode.children[1].nodeName == "UL" || el.parentNode.children[1].nodeName == "OL") {
-              updateList(e, el.value);
+              updateList(e, parseInt(el.value));
           }
           // image
           else if (el.parentNode.children[1].nodeName == "IMG") {
