@@ -1,6 +1,6 @@
 # Range.js
 
-A simple and light vanilla JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 `<input type="range">` element.
+A plain JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 `<input type="range">` element.
 
 ## Usage:
 
@@ -72,9 +72,9 @@ Here are live [examples](http://kylesb.github.io/range.js/).
 
 ## API
 
-You can set the `step` of the range through object initialization. The default `step` is 1. However, setting a decimal (i.e. 0.25) can help make scrolling on the input element smoother for items that have a small amount of content (i.e. text or lists).
+You can set the `step` of the range through object initialization. The default `step` is 1. However, setting a decimal can help make scrolling on the input element smoother for items that have a small amount of content (i.e. text or lists).
 
-To set the `step`, pass an interget or decimal on object initialization.
+To set the `step`, pass an integer or decimal on object initialization.
 
 ```html
 <script>
@@ -86,7 +86,7 @@ To set the `step`, pass an interget or decimal on object initialization.
 
 ## Contributing
 
-This is a small, open-source project, and contributions are encouraged. Check the  [Issues](https://github.com/kylesb/range.js/issues) section to view the project roadmap and future goals.
+This is a small, open-source project - contributions are welcomed! Check the  [Issues](https://github.com/kylesb/range.js/issues) section to view open issues, and future goals.
 
   1. Fork the repository
   2. Create a branch for your patch or feature
