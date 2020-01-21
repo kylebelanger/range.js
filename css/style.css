@@ -1,9 +1,10 @@
 input {
+  display: inline-block;
+  position: relative;
   clear: both;
-  position: static;
-  margin: 0 100% 0 0;
 }
 
 img {
+  display: inherit;
   width: 350px;
 }
