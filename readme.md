@@ -1,6 +1,6 @@
 # Range.js
 
-JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 `<input type="range">` element
+JavaScript library to resize, reduce, or change ranges of DOM elements using the HTML5 `<input type="range">` element.
 
 ## Usage:
 
